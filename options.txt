@@ -1,0 +1,21 @@
+## General settings
+
+# path to the folder (or file) where the videos are
+folderpath = "/Users/tapani/T/Courses/2020_insect_camera/Temporary copies of videos"
+
+# show the picture in a window, useful for debugging (True / False)
+window = False 
+
+
+## Motion detection settings
+
+# how large a brightness change is interpreted as movement (0-255?)
+# (larger number = less sensitive, larger brightness change needed)
+min_brightness = 5
+
+# how large the moving object has to be (in millionths of screen area, 0-1000000)
+min_size = 300  
+
+# max size of the moving object (in millionths of screen area, 0-1000000)
+max_size = 10000
+

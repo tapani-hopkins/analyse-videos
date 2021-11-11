@@ -1,0 +1,7 @@
+CC0. In other words, use any way you want, don't worry about it :) Citation appreciated in formal contexts.
+
+BUT note that some of the scripts (marked at the start of the file) are partly based on code by Adrian Rosebrock. His code is free to use except if you are developing a course, book, or other educational product. See his license for details, in "PyImageSearch license.txt". I'm not sure how much of his code is left in the scripts, but enough to be recognisable.
+
+There is also "filevideostream.py", which is a copy of the same file in the imutils package, with one bug fix added. The original's license is "filevideostream license.txt". Short version: can be used at will, as long as the license is kept visible.
+
+Created by Tapani Hopkins, 2021. 
