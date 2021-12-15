@@ -18,7 +18,6 @@ import time
 # import added modules
 import configargparse
 import cv2
-import imutils
 
 # import own modules
 from filevideostream import FileVideoStream
@@ -61,7 +60,8 @@ class Analyse:
 
         # start reading frames in a separate thread
         # frames (up to 128 at a time) are transformed and stored in 'fsv'
-        self.fvs = FileVideoStream(self.video.path, transform=transform).start()
+        # only read one frame a second, ignore rest
+        self.fvs = FileVideoStream(self.video.path, transform=transform, skip=self.video.fps).start()
         time.sleep(0.1)
 
         # open the file in which the results will be saved
@@ -80,27 +80,24 @@ class Analyse:
             # update the frame counter
             self.frameCount += 1
     
-            # only process one frame a second, ignore the other frames
-            if (self.frameCount % self.video.fps == 0):
-                # get the number of moving insects and the bounding boxes around them
-                n, boxes = self.motion.check(frame)
+            n, boxes = self.motion.check(frame)
             
-                # write the number of moving insects in this frame to file
-                self.f.write(self.video.name + u"," + str(self.frameCount) + u"," + str(n) + u"\n")
+            # write the number of moving insects in this frame to file
+            self.f.write(self.video.name + u"," + str(self.frameCount) + u"," + str(n) + u"\n")
     
-                # if displaying the window, draw boxes around moving insects and log keyboard input
-                if self.window:
-                    # draw the bounding boxes on the frame
-                    for x, y, w, h in boxes:
-                        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
+            # if displaying the window, draw boxes around moving insects and log keyboard input
+            if self.window:
+                # draw the bounding boxes on the frame
+                for x, y, w, h in boxes:
+                    cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
     
-                    # show the frame
-                    cv2.imshow("Frame", frame)
+                # show the frame
+                cv2.imshow("Frame", frame)
         
-                    # stop the loop if the user presses 'q'
-                    key = cv2.waitKey(1) & 0xFF
-                    if key == ord("q"):
-                        break
+                # stop the loop if the user presses 'q'
+                key = cv2.waitKey(1) & 0xFF
+                if key == ord("q"):
+                    break
               
         # when all the frames have been processed, stop
         if (not self.stopped):
