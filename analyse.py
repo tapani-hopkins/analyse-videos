@@ -78,7 +78,7 @@ class Analyse:
             frame = self.fvs.read()
             
             # update the frame counter
-            self.frameCount += 1
+            self.frameCount += self.video.fps
     
             n, boxes = self.motion.check(frame)
             
