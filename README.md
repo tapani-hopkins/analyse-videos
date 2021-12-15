@@ -5,7 +5,7 @@
  
  Saves the results (number of moving insects in each frame) to file. Also saves info on each video (e.g. fps) to a separate file. 
  
- Currently very approximate. Gives a very rough indication of how many insects are active.
+ Currently very approximate. Gives a very rough indication of how many insects are active. Only processes one frame a second, other frames are currently ignored.
  
  The main file is 'main.py'. It lists all the video files and passes them one at a time to 'analyse.py', which analyses them using the other files. (Some day, I'll work out how to package python scripts)
  
